@@ -1,4 +1,18 @@
-# Inheritance
+# Inheritance & Polymorphism
+
+**Table of Contents:**
+- [Inheritance](#inheritance)
+  - [Inheritance Chain](#inheritance-chain)
+  - [Establishing Inheritance Between Custom Classes](#establishing-inheritance-between-custom-classes)
+    - [Extends and Super](#extends-and-super)
+- [Polymorphism](#polymorphism)
+- [Using Classes with Other Classes](#using-classes-with-other-classes)
+- [Challenge: User & Admin](#challenge-user--admin)
+- [Challenge](#challenge)
+- [Summary](#summary)
+
+
+## Inheritance
 
 **Inheritance** is a pillar of object-oriented programming. It describes a relationship between two classes: a **subclass** that inherits methods from a **superclass**. As a result, instances of the sub-class can use methods defined in a super-class. 
 
@@ -17,7 +31,7 @@ Every Array inherits methods from the `Array.prototype` which inherits methods f
 
 Inheritance can exist in a chain in which a sub-sub-class can inherit from a sub-class which inherits from a super-class.
 
-![](./diagram1.png)
+![A Person class sits at the top of the "tree". A Doctor, a Professor, and a Student class sit below and all inherit from the Person class. A GraduateStudent class inherits from the Student class.](./images/inheritance.png)
 
 **Question: What is the inheritance relationship between the `Professor` class and the `Person` class? What about the `GraduateStudent` class and the `Person` class?**
 
@@ -149,9 +163,12 @@ class Person {
 }
 
 class Programmer extends Person {
-  constructor(name, language) {
-    super(name);
-    this.favoriteLanguage = language;
+  // the constructor can be inherited too as long as the signature doesn't need changing
+
+  // here we totally override the parent method
+  makeFriend(friend) {
+    this.friends.push(friend);
+    console.log('tap tap tap');
   }
 }
 
@@ -167,7 +184,7 @@ class Musician extends Person {
 }
 
 const carmen = new Person("Carmen");
-const reuben = new Programmer("Reuben", "JavaScript");
+const reuben = new Programmer("Reuben");
 const ben = new Musician("Ben", "Piano");
 const people = [carmen, reuben, ben];
 
@@ -204,33 +221,34 @@ class Car {
     this.model = model;
   }
   
-  makeSound() {
+  drive() {
     console.log("Vrooom");
   }
 }
 
 class RaceCar extends Car {
-  constructor(make, model) {
-    super(make, model);
-  }
+
+  // the constructor can be inherited too as long as the signature doesn't need changing
   
-  makeSound() { // Method Override
+  drive() { // Method Override
     console.log("Vah... Vah...");
-    super.makeSound();
+    super.drive(); // invoke the parent class method
     console.log("WHEEEEEEE!!!!");
   }
 }
 
 const car1 = new Car("Chevy", "Cobalt");
 const car2 = new RaceCar("Ferrari", "Portofino");
+const car3 = new Car("Tesla", "Model X");
 
-car1.makeSound();
-car2.makeSound();
+const cars = [car1, car2, car3];
+cars.forEach((car) => car.makeSound()); 
+// since they are all Cars, they all have drive, even if they behave differently
 ```
 
-Both classes implement a method called `makeSound` but they have their own implementations. The code that calls these methods doesn't care how each class implements `makeSound()` — as long as instances of `Car` and `RaceCar` have a `makeSound` method at all, the code will work.
+Both classes implement a method called `drive` but they have their own implementations. The code that calls these methods doesn't care how each class implements `drive()` — as long as instances of `Car` and `RaceCar` have a `makeSound` method at all, the code will work.
 
-The subclass `RaceCar` uses the `Car` `makeSound` method sandwiched between two of its own `console.log` statements.
+The subclass `RaceCar` uses the `Car` `drive` method sandwiched between two of its own `console.log` statements.
 
 `Car` objects can come in many forms (they look the same, but they may behave differently).
 
@@ -297,3 +315,77 @@ An `Admin` should be a subclass of `User`. It should also have:
 * A method called `doSecretAdminStuff` that just prints a message `"Doing secret admin stuff"`.
 
 Then, create a user instance and an admin instance and demonstrate how to use all of their methods.
+
+## Summary
+
+* **Inheritance** occurs when a **child class** inherits properties and methods from a **parent class**
+  * The `extends` keyword creates this relationship
+  * The `super` keyword references the parent class
+  * You can invoke `super()` to invoke the parent class constructor.
+
+```js
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.friends = [];
+  }
+  makeFriend(friend) {
+    this.friends.push(friend)
+    console.log(`Hi ${friend}, my name is ${this.name}, nice to meet you!`);
+  }
+  doActivity(activity) {
+    console.log(`${this.name} is ${activity}`);
+  }
+}
+
+class Programmer extends Person {
+  constructor(name, age, language) {
+    super(name, age);                 // invoke the Person constructor, setting the name, age, and friends properties on `this`
+    this.favoriteLanguage = language; // add a favoriteLanguage property only for Programmers
+  }
+  
+  // makeFriend is inherited
+  // doActivity is inherited
+  
+  code() { // a new method only Programmer instances can use
+    this.doActivity(`writing some ${this.favoriteLanguage} code.`);
+  }
+}
+```
+
+* **Polymorphism** ("many forms") occurs when multiple types of objects share "signatures" (they have the same property and method names).
+  * The impact of polymorphism is that **our program can reliably use different types of objects in the same way** if they all descend from the same parent class.
+  * Method Overriding means that method signatures are the same even if their implementations are different
+
+```js
+class Car {
+  constructor(make, model) {
+    this.make = make;
+    this.model = model;
+  }
+  
+  drive() {
+    console.log("Vrooom");
+  }
+}
+
+class RaceCar extends Car {
+
+  // the constructor can be inherited too as long as the signature doesn't need changing
+  
+  drive() { // Method Override
+    console.log("Vah... Vah...");
+    super.drive(); // invoke the parent class method
+    console.log("WHEEEEEEE!!!!");
+  }
+}
+
+const car1 = new Car("Chevy", "Cobalt");
+const car2 = new RaceCar("Ferrari", "Portofino");
+const car3 = new Car("Tesla", "Model X");
+
+const cars = [car1, car2, car3];
+cars.forEach((car) => car.makeSound()); 
+// since they are all Cars, they all have drive, even if they behave differently
+```
