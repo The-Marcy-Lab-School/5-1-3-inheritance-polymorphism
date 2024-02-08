@@ -2,12 +2,12 @@
 
 **Table of Contents:**
 - [Inheritance](#inheritance)
-  - [Inheritance Chain](#inheritance-chain)
+  - [Inheritance Chain and "Is A" Relationships](#inheritance-chain-and-is-a-relationships)
   - [Establishing Inheritance Between Custom Classes](#establishing-inheritance-between-custom-classes)
     - [Extends and Super](#extends-and-super)
 - [Polymorphism](#polymorphism)
 - [Using Classes with Other Classes](#using-classes-with-other-classes)
-- [Challenge: User & Admin](#challenge-user--admin)
+- [Challenge: User \& Admin](#challenge-user--admin)
 - [Challenge](#challenge)
 - [Summary](#summary)
 
@@ -38,7 +38,7 @@ console.log(arr instanceof Object);
 </details>
 <br>
 
-### Inheritance Chain
+### Inheritance Chain and "Is A" Relationships
 
 Inheritance can exist in a chain in which a sub-sub-class can inherit from a sub-class which inherits from a super-class.
 
