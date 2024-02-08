@@ -1,50 +1,37 @@
 # Inheritance & Polymorphism
 
 **Table of Contents:**
-- [Inheritance](#inheritance)
-  - [Inheritance Chain and "Is A" Relationships](#inheritance-chain-and-is-a-relationships)
-  - [Establishing Inheritance Between Custom Classes](#establishing-inheritance-between-custom-classes)
-    - [Extends and Super](#extends-and-super)
-- [Polymorphism](#polymorphism)
-- [Using Classes with Other Classes](#using-classes-with-other-classes)
-- [Challenge: User \& Admin](#challenge-user--admin)
-- [Challenge](#challenge)
-- [Summary](#summary)
 
 
-## Inheritance
+
+## Inheritance & "Is A" Relationships
 
 **Inheritance** is a pillar of object-oriented programming. It describes a relationship between two classes: a **subclass** that inherits methods from a **superclass**. As a result, instances of the sub-class can use methods defined in a super-class. 
 
-**Question: What are two of JavaScript's essential data types that demonstrate inheritance? Which is the subclass and which is the superclass?**
+We call this an "Is A" relationship
 
-<details><summary>Answer</summary>
+![A Person class sits at the top of the "tree". A Doctor, a Professor, and a Student class sit below and all inherit from the Person class. A GraduateStudent class inherits from the Student class.](./images/inheritance.png)
+
+**Question: What is the inheritance relationship between the `Professor` class and the `Person` class? What about the `GraduateStudent` class and the `Person` class?**
+
+### Array is a Subclass of Object
 
 The `Array` class is a sub-class of the `Object` class which is the super-class.
 
-Every Array inherits methods from the `Array.prototype` which inherits methods from the `Object.prototype`. Therefore, all arrays can use `Object.prototype` methods like `toString()`.
+Every Array instance gets methods from the `Array.prototype` which inherits methods from the `Object.prototype`. Therefore, all arrays can use `Object.prototype` methods like `toString()`.
 
 Try running the following code:
 
 ```js
 const arr = [1,2,3];
 
-console.log(arr);
 console.log(arr.toString());
+console.log(arr); // expand the prototype chain to find the .toString() method
+
+console.log(typeof arr); 
 console.log(arr instanceof Array);
 console.log(arr instanceof Object);
 ```
-
-</details>
-<br>
-
-### Inheritance Chain and "Is A" Relationships
-
-Inheritance can exist in a chain in which a sub-sub-class can inherit from a sub-class which inherits from a super-class.
-
-![A Person class sits at the top of the "tree". A Doctor, a Professor, and a Student class sit below and all inherit from the Person class. A GraduateStudent class inherits from the Student class.](./images/inheritance.png)
-
-**Question: What is the inheritance relationship between the `Professor` class and the `Person` class? What about the `GraduateStudent` class and the `Person` class?**
 
 ### Establishing Inheritance Between Custom Classes
 
@@ -72,7 +59,7 @@ class Programmer {
     this.name = name;
     this.age = age;
     this.friends = [];
-    this.favoriteLanguage = language
+    this.favoriteLanguage = language;
   }
   makeFriend(friend) {
     this.friends.push(friend)
@@ -122,6 +109,10 @@ class Programmer extends Person {
   }
 }
 ```
+
+## Refactor Challenge
+
+Take the first code snippet and refactor it such that the `Programmer` class extends the `Person` class.
 
 Using these classes, do the following:
 
