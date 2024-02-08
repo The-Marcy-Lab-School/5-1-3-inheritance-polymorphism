@@ -24,6 +24,17 @@ The `Array` class is a sub-class of the `Object` class which is the super-class.
 
 Every Array inherits methods from the `Array.prototype` which inherits methods from the `Object.prototype`. Therefore, all arrays can use `Object.prototype` methods like `toString()`.
 
+Try running the following code:
+
+```js
+const arr = [1,2,3];
+
+console.log(arr);
+console.log(arr.toString());
+console.log(arr instanceof Array);
+console.log(arr instanceof Object);
+```
+
 </details>
 <br>
 
@@ -37,7 +48,7 @@ Inheritance can exist in a chain in which a sub-sub-class can inherit from a sub
 
 ### Establishing Inheritance Between Custom Classes
 
-Imagine we have our `Person` class and we want to make another called `Programmer`. It will inherit the properties and methods of the superclass `Person` but it will have additional properties and behaviors that only instances of `Programmer` will have.
+Imagine we have a `Person` class. I want to make another class called `Programmer` that can do everything a `Person` can, with some additional properties and behaviors that only instances of `Programmer` will have.
 
 **How NOT to do it**:
 ```js
@@ -117,7 +128,6 @@ Using these classes, do the following:
 * Create an instance of `Programmer`
 * Invoke all of the methods that the instance inherits
 * Use the `instanceof` operator to confirm that your instance is a `Programmer` AND a `Person`
-
 
 Then, with a partner, discuss these questions:
 
