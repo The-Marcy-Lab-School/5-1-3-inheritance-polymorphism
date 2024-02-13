@@ -1,6 +1,16 @@
 # Inheritance & Polymorphism
 
 **Table of Contents:**
+- [Inheritance \& "Is A" Relationships](#inheritance--is-a-relationships)
+  - [Array is a Subclass of Object](#array-is-a-subclass-of-object)
+  - [Establishing Inheritance Between Custom Classes](#establishing-inheritance-between-custom-classes)
+    - [Extends and Super](#extends-and-super)
+- [Refactor Challenge](#refactor-challenge)
+- [Polymorphism](#polymorphism)
+- [Using Classes with Other Classes](#using-classes-with-other-classes)
+- [Challenge: User \& Admin](#challenge-user--admin)
+- [Challenge](#challenge)
+- [Summary](#summary)
 
 
 
