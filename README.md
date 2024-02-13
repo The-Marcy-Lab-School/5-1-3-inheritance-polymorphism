@@ -2,9 +2,9 @@
 
 **Table of Contents:**
 - [Inheritance \& "Is A" Relationships](#inheritance--is-a-relationships)
-  - [Array is a Subclass of Object](#array-is-a-subclass-of-object)
-  - [Establishing Inheritance Between Custom Classes](#establishing-inheritance-between-custom-classes)
-    - [Extends and Super](#extends-and-super)
+- [Array is a Subclass of Object](#array-is-a-subclass-of-object)
+- [Establishing Inheritance Between Custom Classes](#establishing-inheritance-between-custom-classes)
+- [Extends and Super](#extends-and-super)
 - [Refactor Challenge](#refactor-challenge)
 - [Polymorphism](#polymorphism)
 - [Using Classes with Other Classes](#using-classes-with-other-classes)
@@ -24,7 +24,7 @@ We call this an "Is A" relationship
 
 **Question: What is the inheritance relationship between the `Professor` class and the `Person` class? What about the `GraduateStudent` class and the `Person` class?**
 
-### Array is a Subclass of Object
+## Array is a Subclass of Object
 
 The `Array` class is a sub-class of the `Object` class which is the super-class.
 
@@ -43,7 +43,7 @@ console.log(arr instanceof Array);
 console.log(arr instanceof Object);
 ```
 
-### Establishing Inheritance Between Custom Classes
+## Establishing Inheritance Between Custom Classes
 
 Imagine we have a `Person` class. I want to make another class called `Programmer` that can do everything a `Person` can, with some additional properties and behaviors that only instances of `Programmer` will have.
 
@@ -86,7 +86,7 @@ class Programmer {
 
 Q: What bad practice exists this code?
 
-#### Extends and Super
+## Extends and Super
 To remove the repetitive code AND to establish a relationship betwen `Programmer` and `Person`, we use the `extends` and `super` keywords to define our `Programmer` class:
 
 ```js
