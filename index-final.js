@@ -1,113 +1,110 @@
 class Person {
-  #secret = '42'
-
+  #friends = [];
   constructor(name, age) {
+    // this = {}
     this.name = name;
     this.age = age;
+    // return this
   }
-
+  makeFriend(friend) {
+    this.#friends.push(friend);
+    console.log(`hello ${friend}, my name is ${this.name}`);
+  }
+  listFriends() {
+    this.#friends.forEach(friend => console.log(friend));
+  }
   doActivity(activity) {
     console.log(`${this.name} is ${activity}`);
   }
-
-  static sayHi() {
-    console.log('hi')
-  }
-
-  printSecret() {
-    console.log(this.#secret);
-  }
 }
 
-// Person.sayHi();
-
-class FriendlyPerson extends Person {
-  constructor(name, age) {
-    super(name, age);
-    this.friends = [];
-  }
-
-  doActivity(activity) {
-    console.log("i do everything with joy")
-  }
-
-  makeFriend(friend) {
-    this.friends.push(friend)
-    console.log(`Hi ${friend}, my name is ${this.name}, nice to meet you!`);
-  }
-}
-
-// FriendlyPerson.sayHi();
-
-
-
-// Programmer is now a sub class
-// Person is the super class
+// The extends keyword allows Programmer to inherit
+// everything from the Person class
 class Programmer extends Person {
-  constructor(name, age, language) {
-    super(name, age); // invoke the Person constructor
-    this.favoriteLanguage = language
-    // delete this.friends
+  // method overriding
+  constructor(name, age, programmingLanguage) {
+    // super invokes the superclass constructor
+    super(name, age);
+    this.programmingLanguage = programmingLanguage;
   }
-
-  // method override
+  // method overriding
   doActivity(activity) {
-    // calling doActivity from the super class
-    console.log('tap tap tap');
-    super.doActivity(activity);
-    console.log('tap tap tap');
+    super.doActivity(`${activity} in a office chair`);
   }
-
-  // we don't need to redefine makeFriends or doActivity
-
   code() {
-    this.doActivity(`writing some ${this.favoriteLanguage} code.`);
+    // invoking the Person version of doActivity
+    super.doActivity(`writing some ${this.programmingLanguage}`)
+    // invoking the Programmer version of doActivity
+    this.doActivity(`writing some ${this.programmingLanguage}`)
   }
 }
 
-const ben = new Programmer('ben', 29, 'JavaScript');
-const carmen = new FriendlyPerson('carmen', 25);
-const gonzalo = new Person('Gonzalo', 35);
+const ben = new Programmer('ben', 29, 'javascript');
+ben.doActivity('backflipping');
+ben.makeFriend('gonzalo');
+ben.makeFriend('carmen');
+ben.makeFriend('motun');
+ben.makeFriend('christie');
+ben.listFriends();
+ben.code();
+console.log(ben instanceof Person)
+console.log(ben instanceof Programmer)
+console.log(ben);
 
-const people = [ben, carmen, gonzalo];
+////////////////////
+// A Classic Example
+////////////////////
 
-const hostDinner = (people) => {
-  people.forEach((person) => {
-    console.log(person);
-    person.doActivity('eating');
-  })
+class User {
+  /* A user has:
+  username
+  password
+  email
+  id
+
+  A user can:
+  login
+  logout
+  post
+  addFriend
+  */
 }
 
-hostDinner(people);
+class Admin extends User {
+  /* 
+  An admin can also
+  - deleteUser
+  - updateUser
+  */
+}
 
 
-/* 
-Question: Do subclass constructors need to have the
-same parameteres as the superclass constructor?
+///////////////////
+// Another Example
+///////////////////
 
-Answer: No! 
-*/
-class Animal {
-  constructor(name, species) {
+class Product {
+  constructor(name, price, category) {
     this.name = name;
-    this.species = species;
+    this.price = price;
+    this.category = category;
   }
 }
 
-class Dog extends Animal {
-  constructor(name) {
-    super(name, 'canine');
+class Shoe extends Product {
+  constructor(name, price) {
+    super(name, price, 'shoe')
   }
 }
 
-class Cat extends Animal {
-  constructor(name) {
-    super(name, 'feline');
+class Shirt extends Product {
+  constructor(name, price) {
+    super(name, price, 'shirt')
   }
 }
 
-const flip = new Dog('flip')
-const flop = new Cat('flop')
-const foo = new Animal('baba', 'bovine')
+// If I use the Product class, I have to specify that it is a 'shoe'
+const airForce = new Product('airforce', 150, 'shoe');
 
-console.log(flip, flop, foo)
+// With the Shoe class, it is baked into the Shoe constructor
+const airMax = new Shoe('airmax', 100);
